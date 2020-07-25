@@ -1,0 +1,65 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.ibhsystems.dailybackup</groupId>
+		<artifactId>dailybackup-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>dailybackup-setup</artifactId>
+	<packaging>pom</packaging>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.googlecode.maven-download-plugin</groupId>
+				<artifactId>download-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>download-nsis</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>wget</goal>
+						</goals>
+						<configuration>
+							<url>${nsis.download.url}</url>
+							<unpack>true</unpack>
+							<outputDirectory>${project.build.directory}</outputDirectory>
+							<sha1>68f9c7025110b95c20431bbce28f3bf2d0ddb1ff</sha1>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.digitalmediaserver</groupId>
+				<artifactId>nsis-maven-plugin</artifactId>
+				<configuration>
+					<makensisExecutable>${project.build.directory}/nsis-${nsis.version}/Bin/makensis.exe</makensisExecutable>
+
+					<compression>lzma</compression>
+					<compressionIsFinal>true</compressionIsFinal>
+					<compressionDictSize>64</compressionDictSize>
+					<defines>
+						<PROJECT_NAME_SHORT>${project.name.short}</PROJECT_NAME_SHORT>
+						<PROJECT_NAME_CAMEL>${project.name.short}</PROJECT_NAME_CAMEL>
+					</defines>
+				</configuration>
+				<executions>
+					<execution>
+						<id>build-windows-installer</id>
+						<configuration>
+							<scriptFile>${project.basedir}/dailybackup.nsi</scriptFile>
+							<outputFile>${project.name.short}-setup.exe</outputFile>
+						</configuration>
+						<goals>
+							<goal>make</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

@@ -1,0 +1,41 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.ibhsystems.dailybackup</groupId>
+	<artifactId>dailybackup-parent</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>lib</module>
+		<module>service</module>
+		<module>cli</module>
+		<module>ui</module>
+		<module>setup</module>
+	</modules>
+
+	<properties>
+		<project.name.short>dailybackup</project.name.short>
+		<nsis.version>3.05</nsis.version>
+		<nsis.download.url>http://downloads.sourceforge.net/project/nsis/NSIS%203/${nsis.version}/nsis-${nsis.version}.zip</nsis.download.url>
+	</properties>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.digitalmediaserver</groupId>
+					<artifactId>nsis-maven-plugin</artifactId>
+					<version>1.0.2</version>
+				</plugin>
+				<plugin>
+					<groupId>com.googlecode.maven-download-plugin</groupId>
+					<artifactId>download-maven-plugin</artifactId>
+					<version>1.6.0</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>
