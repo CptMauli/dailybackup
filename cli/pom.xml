@@ -10,5 +10,13 @@
 	</parent>
 
 	<artifactId>dailybackup-cli</artifactId>
+	
+	<dependencies>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>dailybackup-lib</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
 
 </project>
